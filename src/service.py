@@ -9,6 +9,9 @@ import pickle
 import os
 import shutil
 import collections
+import tempfile
+import subprocess
+import csv
 
 CHECKPOINTS_BASEDIR = "checkpoints"
 FRAMEWORK_BASEDIR = "framework"
@@ -63,7 +66,7 @@ class Model(object):
             h = next(reader)
             R = []
             for r in reader:
-                R += [[float(x) for x in r]]
+                R += [{"scores": [float(x) for x in r]}]
         return R
 
 
