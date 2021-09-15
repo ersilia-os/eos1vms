@@ -18,6 +18,7 @@ def load_model(framework_dir, checkpoints_dir):
     mdl.load(framework_dir, checkpoints_dir)
     return mdl
 
+
 class Model(object):
     def __init__(self):
         self.DATA_FILE = "data.csv"
@@ -60,16 +61,10 @@ class Model(object):
         with open(pred_file, "r") as f:
             reader = csv.reader(f)
             h = next(reader)
-            results = collections.defaultdict(list)
+            R = []
             for r in reader:
-                smi = r[0]
-                chemid = r[1]
-                prob = float(r[2])
-                results[smi] += [{h[1]:chemid, h[2]:prob}]
-        result = []
-        for smi in smiles_list:
-            result += [results[smi]]
-        return result
+                R += [[float(x) for x in r]]
+        return R
 
 
 class Artifact(BentoServiceArtifact):
