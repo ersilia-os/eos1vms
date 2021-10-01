@@ -69,7 +69,7 @@ class Model(object):
                 R += [{"scores": [float(x) for x in r]}]
         output = {
             'result': R,
-            'meta': h
+            'meta': {'scores': h}
         }
         return output
 
