@@ -12,11 +12,11 @@ This model has been published by George, Ligand-based target predictions in ChEM
 Code: https://github.com/chembl/target_predictions
 
 ## Extended description
-This model is a ligand-based target prediction model that learns what substructural features (encoded as fingerprints) of ligands correlate with activity against a certain target and assign a score to each of these features. It also comes up with a sorted list of likely targets with the highest scores.
+This model is a ligand-based target prediction model that learns what features of ligands have mutual relations with activity against a certain target and assign a score to each of these features. 
 
 ### Summary
 - Trained using ligand information only
-- Predict targets for small molecule drugs
+- Predict targets for small molecule compounds
 - Licensed using Apache 2.0 License
 
 ### Specification
