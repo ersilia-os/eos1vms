@@ -1,4 +1,4 @@
-# ChEMBL Multi-task descriptor
+# ChEMBL multi-task descriptor
 
 Protein target prediction based on ChEMBL data
 
