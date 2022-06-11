@@ -7,7 +7,7 @@ Protein target prediction based on ChEMBL data
 | Predicts targets of small molecule compounds | SMILES | Protein target | ChEMBL_18 and 1244 targets | No |
 
 ## Source code
-This model has been published by George, Ligand-based target predictions in ChEMBL April 03, 2014 https://chembl.github.io/ligand-based-target-predictions-in/#
+This model has been published by George Papadatos. Ligand-based target predictions. *ChEMBL* https://chembl.github.io/ligand-based-target-predictions-in/# (2014)
 
 Code: https://github.com/chembl/target_predictions
 
