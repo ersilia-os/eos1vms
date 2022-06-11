@@ -15,7 +15,7 @@ Code: https://github.com/chembl/target_predictions
 This model is a ligand-based target prediction model that learns what features of ligands have mutual relations with activity against a certain target and assign a score to each of these features. 
 
 ### Summary
-- Trained using ligand information only
+- Trained using pairs of compounds and protein targets
 - Predict targets for small molecule compounds
 - Licensed using Apache 2.0 License
 
