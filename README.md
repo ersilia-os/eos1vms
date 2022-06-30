@@ -1,27 +1,23 @@
-# ChEMBL multi-task descriptor
+# Ligand-based target prediction
 
-Protein target prediction based on ChEMBL data
+## Model Identifiers
+- Slug: chembl-multitask-descriptor
+- Ersilia ID: eos1vms
+- Tags: target, protein, bioactivity
 
-| Description | Input  | Output  | Training Data | Experimental Validation |
-| ------- | --- | --- | --- | --- |
-| A ligand-based prediction model by the ChEMBL team. The model predicts the main target of a small molecule with an accuracy of 69%  | SMILES | Protein target | ChEMBL_18 and 1244 targets | No |
+## Model Description 
+Prediction of the main target of a molecule based on ChEMBL18 compound-protein target pairs
+- Input: SMILES 
+- Output: Protein target 
+- Training data: 1244 targets ftp://ftp.ebi.ac.uk/pub/databases/chembl/ChEMBLdb/releases/chembl_18/chembl_18_release_notes.txt
+- Experimentally validated: No 
 
 ## Source code
 This model has been published by George Papadatos. Ligand-based target predictions. *ChEMBL* https://chembl.github.io/ligand-based-target-predictions-in/# (2014)
+- Code: https://github.com/chembl/target_predictions
 
-Code: https://github.com/chembl/target_predictions
-
-## Extended description
-This model is a ligand-based target prediction model that learns what features of ligands have mutual relations with activity against a certain target and assign a score to each of these features. 
-
-### Summary
-- Trained using pairs of compounds and protein targets
-- Predict targets for small molecule compounds
-- Licensed using Apache 2.0 License
-
-### Specification
-- Input: SMILES compound
-- Output: protein targets
+## License
+The GPL-v3 license applies to all parts of the repository that are not externally maintained libraries. This repository uses the externally maintained library "target_prdictions", located at `/model` and licensed under a Apache 2.0 License
 
 ## History
 - Model was downloaded on September 14, 2021
