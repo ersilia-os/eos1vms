@@ -9,6 +9,8 @@
 Prediction of the main target of a molecule based on ChEMBL18 compound-protein target pairs
 - Input: SMILES 
 - Output: Protein target 
+- Model type: Regression
+- Mode of training: pretrained
 - Training data: 1244 targets ftp://ftp.ebi.ac.uk/pub/databases/chembl/ChEMBLdb/releases/chembl_18/chembl_18_release_notes.txt
 - Experimentally validated: No 
 
