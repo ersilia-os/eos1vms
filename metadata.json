@@ -1,0 +1,32 @@
+{
+    "Identifier": "eos1vms",
+    "Slug": "chembl-multitask-descriptor",
+    "Status": "Ready",
+    "Title": "Multi-target prediction based on ChEMBL data",
+    "Description": "This is a ligand-based target prediction model developed by the ChEMBL team. They trained the model using pairs of small molecules and their protein targets, and produced a predictor for two cut-offs: 1uM and 10uM. The model predicts the main target of a small molecule with an accuracy of 69%. These predictors are available since ChEMBL\\_18 and have been subsequently updated since. You can read more about it in the ChEMBL blogpost. Here we use the ChEMBL\\_25 version (2019).\n",
+    "Mode": "Pretrained",
+    "Input": [
+        "Compound"
+    ],
+    "Input Shape": "Single",
+    "Task": [
+        "Classification"
+    ],
+    "Output": [
+        "Text"
+    ],
+    "Output Type": [
+        "String"
+    ],
+    "Output Shape": "Flexible List",
+    "Interpretation": "Main protein target. Thresholds at 10 uM and 1 uM",
+    "Tag": [
+        "Bioactivity profile",
+        "Target identification",
+        "ChEMBL"
+    ],
+    "Publication": "https://chembl.github.io/ligand-based-target-predictions-in/",
+    "Source Code": "https://github.com/chembl/target_predictions",
+    "License": "Apache-2.0",
+    "Contributor": "miquelduranfrigola"
+}
