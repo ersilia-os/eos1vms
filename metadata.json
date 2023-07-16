@@ -28,5 +28,11 @@
     "Publication": "https://chembl.github.io/ligand-based-target-predictions-in/",
     "Source Code": "https://github.com/chembl/target_predictions",
     "License": "Apache-2.0",
-    "Contributor": "miquelduranfrigola"
+    "Contributor": "miquelduranfrigola",
+    "S3": "https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos1vms.zip",
+    "DockerHub": "https://hub.docker.com/r/ersiliaos/eos1vms",
+    "Docker Architecture": [
+        "AMD64",
+        "ARM64"
+    ]
 }

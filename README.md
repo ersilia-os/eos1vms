@@ -23,6 +23,11 @@ This is a ligand-based target prediction model developed by the ChEMBL team. The
 * [Source Code](https://github.com/chembl/target_predictions)
 * Ersilia contributor: [miquelduranfrigola](https://github.com/miquelduranfrigola)
 
+## Ersilia model URLs
+* [GitHub](https://github.com/ersilia-os/eos1vms)
+* [AWS S3](https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos1vms.zip)
+* [DockerHub](https://hub.docker.com/r/ersiliaos/eos1vms) (AMD64, ARM64)
+
 ## Citation
 
 If you use this model, please cite the [original authors](https://chembl.github.io/ligand-based-target-predictions-in/) of the model and the [Ersilia Model Hub](https://github.com/ersilia-os/ersilia/blob/master/CITATION.cff).
