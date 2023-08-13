@@ -1,1 +1,1 @@
-python $1/code/main2.py $2 $3 $4
+python $1/code/main.py $2 $3 $4
