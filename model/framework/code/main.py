@@ -50,7 +50,7 @@ class Chembl(object):
             preds = self._format_preds(preds, [o.name for o in self.ort_session.get_outputs()])
             fp = np.zeros(len(self.targets))
             for p in preds:
-                print("KEY:" p[0])
+                print("KEY:", p[0])
                 fp[self.target_idxs[p[0]]] = p[1]
             fps += [fp]
         X = np.array(fps)
