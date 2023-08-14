@@ -2,6 +2,7 @@ import os
 import sys
 import numpy as np
 import csv
+import pandas as pd
 
 from rdkit import Chem
 from rdkit.Chem import rdMolDescriptors
@@ -80,11 +81,13 @@ with open(input_file, "r") as f:
         mols += [Chem.MolFromSmiles(r[0])]
 
 X = desc.calc(mols)
-targets = desc.targets 
 
+data = pd.DataFrame(X, columns=desc.targets)
+
+# Open the output file in append mode
 with open(output_file, "a", newline="") as f:
     writer = csv.writer(f)
-    #writer.writerow(desc.targets)
-    writer.writerow(["Alice", "Target", "Test"])
-    for i in range(X.shape[0]):
-        writer.writerow(X[i])
+    #writer.writerow(desc.targets)  # Write the header
+
+    # Append the DataFrame data to the output file
+    data.to_csv(f, header=False, index=False)
