@@ -87,7 +87,7 @@ data = pd.DataFrame(X, columns=desc.targets)
 # Open the output file in append mode
 with open(output_file, "a", newline="") as f:
     writer = csv.writer(f)
-    #writer.writerow(desc.targets)  # Write the header
+    writer.writerow(desc.targets)  # Write the header
 
     # Append the DataFrame data to the output file
     data.to_csv(f, header=False, index=False)
