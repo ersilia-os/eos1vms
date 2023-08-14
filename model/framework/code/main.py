@@ -23,11 +23,10 @@ class Chembl(object):
     def __init__(self):
         self.model_path = os.path.join(checkpoints_dir, "chembl_28_multitask.onnx")
         self.ort_session = rt.InferenceSession(self.model_path)
-        self.targets = None
-        self.target_idxs = None
+        self._work_out_targets()
 
     def _work_out_targets(self):
-        descs = self._calc_morgan_fp(Chem.MolFromSmiles(self.targets[0])) 
+        descs = self._calc_morgan_fp(Chem.MolFromSmiles(EXAMPLE))
         ort_inputs = {self.ort_session.get_inputs()[0].name: descs}
         preds = self.ort_session.run(None, ort_inputs)
         preds = self._format_preds(preds, [o.name for o in self.ort_session.get_outputs()])
@@ -67,6 +66,7 @@ class Chembl(object):
         return X
 
 
+desc = Chembl()
 
 with open(input_file, "r") as f:
     reader = csv.reader(f)
@@ -75,13 +75,7 @@ with open(input_file, "r") as f:
     for r in reader:
         smiles += [r[0]]
         mols += [Chem.MolFromSmiles(r[0])]
-    
-
-model_path = os.path.join(checkpoints_dir, "chembl_28_multitask.onnx")
-desc = Chembl(model_path)
-desc.targets = smiles
-desc._work_out_targets()
-X = desc.calc(mols)
+    X = desc.calc(mols)
 
 with open(output_file, "w") as f:
     writer = csv.writer(f)
