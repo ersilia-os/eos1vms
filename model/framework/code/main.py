@@ -81,5 +81,4 @@ with open(output_file, "w") as f:
     writer = csv.writer(f)
     writer.writerow(desc.targets)
     for i in range(X.shape[0]):
-        print("Writing ChEMBL ID:", desc.targets[i])
-        writer.writerow(desc.targets[i])
+        writer.writerow([X[i]['chembl_id']])
