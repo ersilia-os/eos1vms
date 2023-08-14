@@ -79,6 +79,6 @@ with open(input_file, "r") as f:
 
 with open(output_file, "w") as f:
     writer = csv.writer(f)
-    writer.writerow(desc.targets)
-    for i in range(X.shape[0]):
-        writer.writerow(X[i])
+    writer.writerow(["Molecule"] + desc.targets)  # Add "Molecule" header
+    for i in range(len(smiles)):
+        writer.writerow([smiles[i]] + X[i]) 
