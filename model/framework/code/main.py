@@ -84,6 +84,7 @@ targets = desc.targets
 
 with open(output_file, "w") as f:
     writer = csv.writer(f)
-    writer.writerow(desc.targets)
+    #writer.writerow(desc.targets)
+    writer.writerow("Alice", "Target", "Test")
     for i in range(X.shape[0]):
         writer.writerow(X[i])
