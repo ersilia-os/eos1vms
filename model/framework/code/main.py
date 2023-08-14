@@ -72,7 +72,7 @@ desc = Chembl(model_path)
 
 # Set the targets based on the names of the model outputs
 desc.targets = [o.name for o in desc.ort_session.get_outputs()]
-desc.target_idxs = dict((k.split('.')[1], i) for i, k in enumerate(desc.targets)
+desc.target_idxs = dict((k.split('.')[1], i) for i, k in enumerate(desc.targets))
 #print("Targets:", desc.targets)
 #print("Target Indexes:", desc.target_idxs)
 
