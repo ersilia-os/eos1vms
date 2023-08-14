@@ -78,7 +78,6 @@ with open(input_file, "r") as f:
         smiles += [r[0]]
         mols += [Chem.MolFromSmiles(r[0])]
     X = desc.calc(mols)
-    print("x", X)
 
 main_targets = [desc.targets[np.argmax(row)] for row in X]
 print("main targets", main_targets)
@@ -87,4 +86,6 @@ with open(output_file, "w") as f:
     writer = csv.writer(f)
     writer.writerow(['Molecule', 'Main Target'])
     for mol_smiles, target in zip(smiles, main_targets):
+        print("smiles", mol_smiles)
+        print("target", target)
         writer.writerow([mol_smiles, target])
