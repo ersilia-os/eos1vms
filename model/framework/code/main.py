@@ -84,6 +84,6 @@ main_targets = [desc.targets[np.argmax(row)] for row in X]
 
 with open(output_file, "w") as f:
     writer = csv.writer(f)
-    writer.writerow(desc.targets)
-    for i in range(X.shape[0]):
-        writer.writerow(X[i])
+    writer.writerow(['Molecule', 'Main Target'])
+    for mol_smiles, target in zip(smiles, main_targets):
+        writer.writerow([mol_smiles, target])
