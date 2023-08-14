@@ -81,6 +81,7 @@ with open(input_file, "r") as f:
     print("x", X)
 
 main_targets = [desc.targets[np.argmax(row)] for row in X]
+print("main targets" main_targets)
 
 with open(output_file, "w") as f:
     writer = csv.writer(f)
