@@ -19,11 +19,11 @@ checkpoints_dir = os.path.abspath("eos1vms/model/checkpoints")
 
 class Chembl(object):
 
-    def __init__(self, model_path):
-        self.model_path = model_path
+    def __init__(self):
+        self.model_path = os.path.join(checkpoints_dir, "chembl_28_multitask.onnx")
         self.ort_session = rt.InferenceSession(self.model_path)
-        self.targets = None
-        self.target_idxs = None
+        self.targets = [o.name for o in desc.ort_session.get_outputs()]
+        self.target_idxs = dict((k, i) for i, k in enumerate(desc.targets))
 
     def _calc_morgan_fp(self, mol):
         fp = rdMolDescriptors.GetMorganFingerprintAsBitVect(
@@ -64,17 +64,11 @@ with open(input_file, "r") as f:
         smiles += [r[0]]
         mols += [Chem.MolFromSmiles(r[0])]
 
-# Path to the ONNX model file
-model_path = os.path.join(checkpoints_dir, "chembl_28_multitask.onnx")
 
 # Create the Chembl instance with the model_path
 desc = Chembl()
 
 # Set the targets based on the names of the model outputs
-desc.targets = [o.name for o in desc.ort_session.get_outputs()]
-desc.target_idxs = dict((k, i) for i, k in enumerate(desc.targets))
-#print("Targets:", desc.targets)
-#print("Target Indexes:", desc.target_idxs)
 
 
 # Calculate the features for all input molecules
