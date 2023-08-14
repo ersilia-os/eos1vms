@@ -69,22 +69,20 @@ class Chembl(object):
 desc = Chembl()
 
 smiles = []
+mols = []
 
 with open(input_file, "r") as f:
     reader = csv.reader(f)
-    mols = []
+    
     
     for r in reader:
         smiles += [r[0]]
         mols += [Chem.MolFromSmiles(r[0])]
-    X = desc.calc(mols)
-    print("x", X)
-
-
-header = ["Chembl Target"] + desc.targets
+X = desc.calc(mols)
+    
 
 with open(output_file, "w") as f:
     writer = csv.writer(f)
-    writer.writerow(header)
+    writer.writerow(desc.targets)
     for i in range(X.shape[0]):
         writer.writerow(X[i])
