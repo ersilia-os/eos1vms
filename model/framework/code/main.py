@@ -24,7 +24,6 @@ class Chembl(object):
         self.model_path = os.path.join(checkpoints_dir, "chembl_28_multitask.onnx")
         self.ort_session = rt.InferenceSession(self.model_path)
         self._work_out_targets()
-        self.targets = None
 
     def _work_out_targets(self):
         descs = self._calc_morgan_fp(Chem.MolFromSmiles(EXAMPLE))
@@ -86,5 +85,4 @@ targets = desc.targets
 with open(output_file, "w") as f:
     writer = csv.writer(f)
     for i in range(X.shape[0]):
-        writer.writerow(targets[i])
         writer.writerow(X[i])
