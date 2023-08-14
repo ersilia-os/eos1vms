@@ -84,8 +84,8 @@ print("main targets", main_targets)
 
 with open(output_file, "w") as f:
     writer = csv.writer(f)
-    writer.writerow(['Molecule', 'Main Target'])
+    writer.writerow('Molecule', 'Main Target')
     for mol_smiles, target in zip(smiles, main_targets):
         print("smiles", mol_smiles)
         print("target", target)
-        writer.writerow([mol_smiles, target])
+        writer.writerow(mol_smiles, target)
