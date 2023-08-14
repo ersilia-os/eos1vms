@@ -1,5 +1,6 @@
 import os
 import sys
+print("Command-line arguments:", sys.argv)
 import numpy as np
 import csv
 
