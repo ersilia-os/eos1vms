@@ -50,6 +50,7 @@ class Chembl(object):
             preds = self._format_preds(preds, [o.name for o in self.ort_session.get_outputs()])
             fp = np.zeros(len(self.targets))
             for p in preds:
+                print("KEY:" p[0])
                 fp[self.target_idxs[p[0]]] = p[1]
             fps += [fp]
         X = np.array(fps)
@@ -72,8 +73,8 @@ desc = Chembl(model_path)
 # Set the targets based on the names of the model outputs
 desc.targets = [o.name for o in desc.ort_session.get_outputs()]
 desc.target_idxs = dict((k, i) for i, k in enumerate(desc.targets))
-print("Targets:", desc.targets)
-print("Target Indexes:", desc.target_idxs)
+#print("Targets:", desc.targets)
+#print("Target Indexes:", desc.target_idxs)
 
 
 # Calculate the features for all input molecules
