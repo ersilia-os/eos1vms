@@ -72,9 +72,13 @@ desc = Chembl(model_path)
 # Set the targets based on the names of the model outputs
 desc.targets = [o.name for o in desc.ort_session.get_outputs()]
 desc.target_idxs = dict((k, i) for i, k in enumerate(desc.targets))
+print("Targets:", desc.targets)
+print("Target Indexes:", desc.target_idxs)
+
 
 # Calculate the features for all input molecules
 predicted_targets = desc.calc(mols)
+print("Predicted Targets:", predicted_targets)
 
 # Write the output to the output file
 output_file = os.path.abspath(sys.argv[2])
