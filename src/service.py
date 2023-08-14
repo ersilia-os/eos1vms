@@ -57,6 +57,7 @@ class Model(object):
             ]
             f.write(os.linesep.join(lines))
         cmd = "bash {0}".format(run_file)
+        print("Command to execute:", cmd)
         with open(os.devnull, "w") as fp:
             subprocess.Popen(
                 cmd, stdout=fp, stderr=fp, shell=True, env=os.environ

@@ -7,7 +7,7 @@ import csv
 from rdkit import Chem
 from rdkit.Chem import rdMolDescriptors
 
-#import onnxruntime as rt
+import onnxruntime as rt
 
 FP_SIZE = 1024
 RADIUS = 2
