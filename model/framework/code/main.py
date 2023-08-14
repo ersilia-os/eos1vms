@@ -48,10 +48,11 @@ class Chembl(object):
             ort_inputs = {self.ort_session.get_inputs()[0].name: descs}
             preds = self.ort_session.run(None, ort_inputs)
             preds = self._format_preds(preds, [o.name for o in self.ort_session.get_outputs()])
+            print("predictions:", preds)
             fp = np.zeros(len(self.targets))
             for p in preds:
                 print("KEY:", p)
-                fp[self.target_idxs[p]] = p[1]
+                fp[self.target_idxs[p[0]]] = p[1]
             fps += [fp]
         X = np.array(fps)
         return X
