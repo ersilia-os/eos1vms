@@ -51,7 +51,7 @@ class Chembl(object):
             fp = np.zeros(len(self.targets))
             for p in preds:
                 print("KEY:", p)
-                fp[self.target_idxs[p[0]]] = p[1]
+                fp[self.target_idxs[p]] = p[1]
             fps += [fp]
         X = np.array(fps)
         return X
@@ -72,7 +72,7 @@ desc = Chembl(model_path)
 
 # Set the targets based on the names of the model outputs
 desc.targets = [o.name for o in desc.ort_session.get_outputs()]
-desc.target_idxs = dict((k.split('.')[1], i) for i, k in enumerate(desc.targets))
+desc.target_idxs = dict((k, i) for i, k in enumerate(desc.targets))
 #print("Targets:", desc.targets)
 #print("Target Indexes:", desc.target_idxs)
 
