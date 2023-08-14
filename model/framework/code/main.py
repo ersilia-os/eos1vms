@@ -38,6 +38,7 @@ class Chembl(object):
         dt = [('chembl_id','|U20'), ('pred', '<f4')]
         np_preds = np.array(np_preds, dtype=dt)
         np_preds[::-1].sort(order='pred')
+        print("np_preds", np_preds)
         return np_preds
 
     def calc(self, mols):
