@@ -23,7 +23,6 @@ class Chembl(object):
     def __init__(self):
         self.model_path = os.path.join(checkpoints_dir, "chembl_28_multitask.onnx")
         self.ort_session = rt.InferenceSession(self.model_path)
-        print("ort", self.ort_session)
         self._work_out_targets()
 
     def _work_out_targets(self):
@@ -50,7 +49,6 @@ class Chembl(object):
         dt = [('chembl_id','|U20'), ('pred', '<f4')]
         np_preds = np.array(np_preds, dtype=dt)
         np_preds[::-1].sort(order='pred')
-        print("np_preds", np_preds)
         return np_preds
 
     def calc(self, mols):
@@ -60,14 +58,15 @@ class Chembl(object):
             ort_inputs = {self.ort_session.get_inputs()[0].name: descs}
             preds = self.ort_session.run(None, ort_inputs)
             preds = self._format_preds(preds, [o.name for o in self.ort_session.get_outputs()])
-            print("predictions:", preds)
             fp = np.zeros(len(self.targets))
             for p in preds:
-                print("KEY:", p)
                 fp[self.target_idxs[p[0]]] = p[1]
             fps += [fp]
         X = np.array(fps)
         return X
+
+
+desc = Chembl()
 
 with open(input_file, "r") as f:
     reader = csv.reader(f)
@@ -76,22 +75,10 @@ with open(input_file, "r") as f:
     for r in reader:
         smiles += [r[0]]
         mols += [Chem.MolFromSmiles(r[0])]
+    X = desc.calc(mols)
 
-
-# Create the Chembl instance with the model_path
-desc = Chembl()
-
-# Set the targets based on the names of the model outputs
-
-
-# Calculate the features for all input molecules
-predicted_targets = desc.calc(mols)
-print("Predicted Targets:", predicted_targets)
-
-# Write the output to the output file
-output_file = os.path.abspath(sys.argv[2])
 with open(output_file, "w") as f:
     writer = csv.writer(f)
-    writer.writerow(["Molecule"] + desc.targets)  # Add "Molecule" header
-    for i in range(len(smiles)):
-        writer.writerow([smiles[i]] + predicted_targets[i]) 
+    writer.writerow(desc.targets)
+    for i in range(X.shape[0]):
+        writer.writerow(X[i])
