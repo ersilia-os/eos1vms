@@ -26,17 +26,6 @@ class Chembl(object):
         self.targets = None
         self.target_idxs = None
 
-    def _work_out_targets(self):
-        descs = self._calc_morgan_fp(Chem.MolFromSmiles(self.targets[0]))  # Using the first molecule as a representative
-        ort_inputs = {self.ort_session.get_inputs()[0].name: descs}
-        preds = self.ort_session.run(None, ort_inputs)
-        preds = self._format_preds(preds, [o.name for o in self.ort_session.get_outputs()])
-        targets = []
-        for p in preds:
-            targets += [p[0]]
-        self.targets = sorted(targets)
-        self.target_idxs = dict((k, i) for i, k in enumerate(self.targets))
-
     def _calc_morgan_fp(self, mol):
         fp = rdMolDescriptors.GetMorganFingerprintAsBitVect(
             mol, RADIUS, nBits=FP_SIZE)
@@ -66,7 +55,6 @@ class Chembl(object):
         X = np.array(fps)
         return X
 
-
 # Input file containing SMILES
 input_file = os.path.abspath(sys.argv[1])
 
@@ -84,9 +72,9 @@ model_path = os.path.join(checkpoints_dir, "chembl_28_multitask.onnx")
 # Create the Chembl instance with the model_path
 desc = Chembl(model_path)
 
-# Calculate targets based on the representative molecule
-desc.targets = smiles
-desc._work_out_targets()
+# Set the targets based on the names of the model outputs
+desc.targets = [o.name for o in desc.ort_session.get_outputs()]
+desc.target_idxs = dict((k, i) for i, k in enumerate(desc.targets))
 
 # Calculate the features for all input molecules
 X = desc.calc(mols)
