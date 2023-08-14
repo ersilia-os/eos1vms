@@ -24,6 +24,7 @@ class Chembl(object):
         self.model_path = os.path.join(checkpoints_dir, "chembl_28_multitask.onnx")
         self.ort_session = rt.InferenceSession(self.model_path)
         self._work_out_targets()
+        self.targets = None
 
     def _work_out_targets(self):
         descs = self._calc_morgan_fp(Chem.MolFromSmiles(EXAMPLE))
