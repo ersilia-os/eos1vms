@@ -26,7 +26,7 @@ class Chembl(object):
         print("ort", self.ort_session)
         self._work_out_targets()
 
-     def _work_out_targets(self):
+    def _work_out_targets(self):
         descs = self._calc_morgan_fp(Chem.MolFromSmiles(EXAMPLE))
         ort_inputs = {self.ort_session.get_inputs()[0].name: descs}
         preds = self.ort_session.run(None, ort_inputs)
