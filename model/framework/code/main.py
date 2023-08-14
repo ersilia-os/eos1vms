@@ -48,7 +48,7 @@ class Chembl(object):
         np_preds = [(tar, pre) for tar, pre in zip(targets, preds)]
         dt = [('chembl_id','|U20'), ('pred', '<f4')]
         np_preds = np.array(np_preds, dtype=dt)
-        np_preds[::-1].sort(order='pred')
+        np_preds[::-1].sort(order='chembl_id')
         return np_preds
 
     def calc(self, mols):
@@ -67,19 +67,18 @@ class Chembl(object):
 
 
 desc = Chembl()
-mols = []
-smiles = []
 
 with open(input_file, "r") as f:
     reader = csv.reader(f)
+    mols = []
+    smiles = []
     for r in reader:
         smiles += [r[0]]
         mols += [Chem.MolFromSmiles(r[0])]
-    
-X = desc.calc(mols)
+    X = desc.calc(mols)
 
 with open(output_file, "w") as f:
     writer = csv.writer(f)
-    writer.writerow(["Molecule"] + desc.targets)  # Add "Molecule" header
-    for i in range(len(smiles)):
-        writer.writerow([smiles[i]] + X[i]) 
+    writer.writerow(desc.targets)
+    for i in range(X.shape[0]):
+        writer.writerow(X[i])
