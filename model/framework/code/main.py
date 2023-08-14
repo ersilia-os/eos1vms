@@ -68,7 +68,7 @@ with open(input_file, "r") as f:
 model_path = os.path.join(checkpoints_dir, "chembl_28_multitask.onnx")
 
 # Create the Chembl instance with the model_path
-desc = Chembl(model_path)
+desc = Chembl()
 
 # Set the targets based on the names of the model outputs
 desc.targets = [o.name for o in desc.ort_session.get_outputs()]
