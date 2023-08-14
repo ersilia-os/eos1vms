@@ -22,6 +22,7 @@ class Chembl(object):
     def __init__(self):
         self.model_path = os.path.join(checkpoints_dir, "chembl_28_multitask.onnx")
         self.ort_session = rt.InferenceSession(self.model_path)
+        print("ort", ort_session)
         self.targets = [o.name for o in self.ort_session.get_outputs()]
         self.target_idxs = dict((k, i) for i, k in enumerate(self.targets))
 
