@@ -81,9 +81,10 @@ with open(input_file, "r") as f:
     print("x", X)
 
 
+header = ["Chembl Target"] + desc.targets
 
 with open(output_file, "w") as f:
     writer = csv.writer(f)
-    writer.writerow(["Chembl Target"] + desc.targets)
+    writer.writerow(header)
     for i in range(X.shape[0]):
         writer.writerow(X[i])
