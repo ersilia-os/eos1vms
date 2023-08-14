@@ -67,11 +67,10 @@ class Chembl(object):
 
 
 desc = Chembl()
-
+mols = []
+smiles = []
 with open(input_file, "r") as f:
     reader = csv.reader(f)
-    mols = []
-    smiles = []
     for r in reader:
         smiles += [r[0]]
         mols += [Chem.MolFromSmiles(r[0])]
