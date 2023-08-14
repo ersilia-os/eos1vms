@@ -20,13 +20,14 @@ checkpoints_dir = os.path.abspath("eos1vms/model/checkpoints")
 
 class Chembl(object):
 
-    def __init__(self):
-        self.model_path = os.path.join(checkpoints_dir, "chembl_28_multitask.onnx")
+    def __init__(self, model_path):
+        self.model_path = model_path
         self.ort_session = rt.InferenceSession(self.model_path)
-        self._work_out_targets()
+        self.targets = None
+        self.target_idxs = None
 
     def _work_out_targets(self):
-        descs = self._calc_morgan_fp(Chem.MolFromSmiles(EXAMPLE))
+        descs = self._calc_morgan_fp(Chem.MolFromSmiles(self.targets[0]))  # Using the first molecule as a representative
         ort_inputs = {self.ort_session.get_inputs()[0].name: descs}
         preds = self.ort_session.run(None, ort_inputs)
         preds = self._format_preds(preds, [o.name for o in self.ort_session.get_outputs()])
@@ -34,7 +35,7 @@ class Chembl(object):
         for p in preds:
             targets += [p[0]]
         self.targets = sorted(targets)
-        self.target_idxs = dict((k, i) for i,k in enumerate(self.targets))
+        self.target_idxs = dict((k, i) for i, k in enumerate(self.targets))
 
     def _calc_morgan_fp(self, mol):
         fp = rdMolDescriptors.GetMorganFingerprintAsBitVect(
@@ -66,7 +67,8 @@ class Chembl(object):
         return X
 
 
-desc = Chembl()
+# Input file containing SMILES
+input_file = os.path.abspath(sys.argv[1])
 
 with open(input_file, "r") as f:
     reader = csv.reader(f)
@@ -75,8 +77,21 @@ with open(input_file, "r") as f:
     for r in reader:
         smiles += [r[0]]
         mols += [Chem.MolFromSmiles(r[0])]
-    X = desc.calc(mols)
 
+# Path to the ONNX model file
+model_path = os.path.join(checkpoints_dir, "chembl_28_multitask.onnx")
+
+# Create the Chembl instance with the model_path
+desc = Chembl(model_path)
+
+# Calculate targets based on the representative molecule
+desc.targets = smiles
+desc._work_out_targets()
+
+# Calculate the features for all input molecules
+X = desc.calc(mols)
+
+# Write the output to the output file
 with open(output_file, "w") as f:
     writer = csv.writer(f)
     writer.writerow(desc.targets)
