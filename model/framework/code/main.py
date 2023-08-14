@@ -1,6 +1,5 @@
 import os
 import sys
-print("Command-line arguments:", sys.argv)
 import numpy as np
 import csv
 
@@ -39,7 +38,8 @@ class Chembl(object):
         dt = [('chembl_id','|U20'), ('pred', '<f4')]
         np_preds = np.array(np_preds, dtype=dt)
         np_preds[::-1].sort(order='pred')
-        return np_preds
+        predicted_targets = [p[0] for p in np_preds]
+        return predicted_targets
 
     def calc(self, mols):
         fps = []
@@ -54,9 +54,6 @@ class Chembl(object):
             fps += [fp]
         X = np.array(fps)
         return X
-
-# Input file containing SMILES
-input_file = os.path.abspath(sys.argv[1])
 
 with open(input_file, "r") as f:
     reader = csv.reader(f)
@@ -77,11 +74,12 @@ desc.targets = [o.name for o in desc.ort_session.get_outputs()]
 desc.target_idxs = dict((k, i) for i, k in enumerate(desc.targets))
 
 # Calculate the features for all input molecules
-X = desc.calc(mols)
+predicted_targets = desc.calc(mols)
 
 # Write the output to the output file
+output_file = os.path.abspath(sys.argv[2])
 with open(output_file, "w") as f:
     writer = csv.writer(f)
-    writer.writerow(desc.targets)
-    for i in range(X.shape[0]):
-        writer.writerow(X[i])
+    writer.writerow(["Molecule"] + desc.targets)  # Add "Molecule" header
+    for i in range(len(smiles)):
+        writer.writerow([smiles[i]] + predicted_targets[i]) 
