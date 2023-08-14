@@ -82,7 +82,7 @@ with open(input_file, "r") as f:
 X = desc.calc(mols)
 targets = desc.targets 
 
-with open(output_file, "w", newline = "") as f:
+with open(output_file, "a", newline="") as f:
     writer = csv.writer(f)
     #writer.writerow(desc.targets)
     writer.writerow(["Alice", "Target", "Test"])
