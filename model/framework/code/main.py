@@ -80,6 +80,8 @@ with open(input_file, "r") as f:
     X = desc.calc(mols)
     print("x", X)
 
+main_targets = [desc.targets[np.argmax(row)] for row in X]
+
 with open(output_file, "w") as f:
     writer = csv.writer(f)
     writer.writerow(desc.targets)
