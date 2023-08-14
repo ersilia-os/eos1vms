@@ -22,8 +22,8 @@ class Chembl(object):
     def __init__(self):
         self.model_path = os.path.join(checkpoints_dir, "chembl_28_multitask.onnx")
         self.ort_session = rt.InferenceSession(self.model_path)
-        self.targets = [o.name for o in desc.ort_session.get_outputs()]
-        self.target_idxs = dict((k, i) for i, k in enumerate(desc.targets))
+        self.targets = [o.name for o in self.ort_session.get_outputs()]
+        self.target_idxs = dict((k, i) for i, k in enumerate(self.targets))
 
     def _calc_morgan_fp(self, mol):
         fp = rdMolDescriptors.GetMorganFingerprintAsBitVect(
