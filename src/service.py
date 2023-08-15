@@ -67,12 +67,13 @@ class Model(object):
             h = next(reader)
             R = []
             for r in reader:
-                R += [{"header": h, "scores": [str(x) for x in r]}]
-        output = {
-            'result': R,
-            'meta': {'scores': h}
+                R += [{"outcome": [float(x) for x in r]}]
+        meta = {"outcome":h}
+        result = {
+            "result": R,
+            "meta": meta
         }
-        return output
+        return result
 
 
 class Artifact(BentoServiceArtifact):
