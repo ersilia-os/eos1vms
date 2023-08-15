@@ -68,7 +68,7 @@ class Model(object):
                 R += [
                     {"scores": [float(x) for x in r]}
                 ]  # <-- EDIT: Modify according to type of output (Float, String...)
-          output = {
+        output = {
             'result': R,
             'meta': {'scores': h}
         }
