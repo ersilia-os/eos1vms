@@ -25,7 +25,7 @@ def load_model(framework_dir, checkpoints_dir):
 class Model(object):
     def __init__(self):
         self.DATA_FILE = "data.csv"
-        self.PRED_FILE = "pred.csv"
+        self.OUTPUT_FILE = "pred.csv"
         self.RUN_FILE = "run.sh"
 
     def load(self, framework_dir, checkpoints_dir):
@@ -38,41 +38,40 @@ class Model(object):
     def set_framework_dir(self, dest):
         self.framework_dir = os.path.abspath(dest)
 
-    def run(self, smiles_list):
-        tmp_folder = tempfile.mkdtemp()
+      def run(self, input_list):
+        tmp_folder = tempfile.mkdtemp(prefix="eos-")
         data_file = os.path.join(tmp_folder, self.DATA_FILE)
-        pred_file = os.path.join(tmp_folder, self.PRED_FILE)
+        output_file = os.path.join(tmp_folder, self.OUTPUT_FILE)
+        log_file = os.path.join(tmp_folder, self.LOG_FILE)
         with open(data_file, "w") as f:
-            for smiles in smiles_list:
-                f.write(smiles + os.linesep)
+            f.write("input" + os.linesep)
+            for inp in input_list:
+                f.write(inp + os.linesep)
         run_file = os.path.join(tmp_folder, self.RUN_FILE)
         with open(run_file, "w") as f:
             lines = [
                 "bash {0}/run.sh {0} {1} {2}".format(
-                    self.framework_dir,
-                    data_file,
-                    pred_file,
+                    self.framework_dir, data_file, output_file
                 )
             ]
             f.write(os.linesep.join(lines))
         cmd = "bash {0}".format(run_file)
-
-        print("Command to execute:", cmd)
-        with open(os.devnull, "w") as fp:
+        with open(log_file, "w") as fp:
             subprocess.Popen(
                 cmd, stdout=fp, stderr=fp, shell=True, env=os.environ
             ).wait()
-        with open(pred_file, "r") as f:
+        with open(output_file, "r") as f:
             reader = csv.reader(f)
             h = next(reader)
             R = []
             for r in reader:
-                R += [{"scores": [float(x) for x in r]}]
-        output = {
-            'result': R,
-            'meta': {'scores': h}
-        }
-        return output
+                R += [
+                    {"outcome": [float(x) for x in r]}
+                ]  # <-- EDIT: Modify according to type of output (Float, String...)
+        meta = {"outcome": h}
+        result = {"result": R, "meta": meta}
+        shutil.rmtree(tmp_folder)
+        return result
 
 
 class Artifact(BentoServiceArtifact):
