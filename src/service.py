@@ -39,40 +39,39 @@ class Model(object):
         self.framework_dir = os.path.abspath(dest)
 
     def run(self, smiles_list):
-        tmp_folder = tempfile.mkdtemp(prefix="eos-")
+        tmp_folder = tempfile.mkdtemp()
         data_file = os.path.join(tmp_folder, self.DATA_FILE)
-        output_file = os.path.join(tmp_folder, self.OUTPUT_FILE)
-        log_file = os.path.join(tmp_folder, self.LOG_FILE)
+        pred_file = os.path.join(tmp_folder, self.OUTPUT_FILE)
         with open(data_file, "w") as f:
-            f.write("input" + os.linesep)
-            for inp in input_list:
-                f.write(inp + os.linesep)
+            for smiles in smiles_list:
+                f.write(smiles + os.linesep)
         run_file = os.path.join(tmp_folder, self.RUN_FILE)
         with open(run_file, "w") as f:
             lines = [
                 "bash {0}/run.sh {0} {1} {2}".format(
-                    self.framework_dir, data_file, output_file
+                    self.framework_dir,
+                    data_file,
+                    pred_file,
                 )
             ]
             f.write(os.linesep.join(lines))
         cmd = "bash {0}".format(run_file)
-        with open(log_file, "w") as fp:
+
+        print("Command to execute:", cmd)
+        with open(os.devnull, "w") as fp:
             subprocess.Popen(
                 cmd, stdout=fp, stderr=fp, shell=True, env=os.environ
             ).wait()
-        with open(output_file, "r") as f:
+        with open(pred_file, "r") as f:
             reader = csv.reader(f)
             h = next(reader)
             R = []
             for r in reader:
-                R += [
-                    {"scores": [float(x) for x in r]}
-                ]  # <-- EDIT: Modify according to type of output (Float, String...)
+                R += [{"scores": [float(x) for x in r]}]
         output = {
             'result': R,
             'meta': {'scores': h}
         }
-        shutil.rmtree(tmp_folder)
         return output
 
 
