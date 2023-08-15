@@ -67,7 +67,7 @@ class Model(object):
             h = next(reader)
             R = []
             for r in reader:
-                R += [{"scores": [str(x) for x in r]}]
+                R += [{"header": header, "scores": [str(x) for x in r]}]
         output = {
             'result': R,
             'meta': {'scores': h}
