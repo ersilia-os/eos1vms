@@ -90,4 +90,4 @@ with open(output_file, "a", newline="") as f:
     writer.writerow(desc.targets)  # Write the header
 
     # Append the DataFrame data to the output file
-    data.to_csv(f, header=False, index=False)
+    data.to_csv(f, index=False)
