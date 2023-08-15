@@ -38,7 +38,7 @@ class Model(object):
     def set_framework_dir(self, dest):
         self.framework_dir = os.path.abspath(dest)
 
-    def run(self, input_list):
+    def run(self, smiles_list):
         tmp_folder = tempfile.mkdtemp(prefix="eos-")
         data_file = os.path.join(tmp_folder, self.DATA_FILE)
         output_file = os.path.join(tmp_folder, self.OUTPUT_FILE)
@@ -66,12 +66,14 @@ class Model(object):
             R = []
             for r in reader:
                 R += [
-                    {"outcome": [float(x) for x in r]}
+                    {"scores": [float(x) for x in r]}
                 ]  # <-- EDIT: Modify according to type of output (Float, String...)
-        meta = {"outcome": h}
-        result = {"result": R, "meta": meta}
+          output = {
+            'result': R,
+            'meta': {'scores': h}
+        }
         shutil.rmtree(tmp_folder)
-        return result
+        return output
 
 
 class Artifact(BentoServiceArtifact):
