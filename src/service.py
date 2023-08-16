@@ -72,7 +72,7 @@ class Model(object):
             result": R,
             "meta": {"outcome": h}
         }
-        shutil.rmtree(tmp_folder)
+        #shutil.rmtree(tmp_folder)
         return output
 
 
