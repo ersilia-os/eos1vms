@@ -66,11 +66,11 @@ class Model(object):
             reader = csv.reader(f)
             h = next(reader)
             R = []
-            for r in reader:
-                R += [{"outcome": [float(x) for x in r]}]
+            data = [list(map(float, r)) for r in reader]
+        df = pd.DataFrame(data, columns=h)
         output = {
-            "result": R,
-            "outcome": h
+            "dataframe": df
+
         }
         shutil.rmtree(tmp_folder)
         return output
