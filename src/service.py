@@ -72,7 +72,8 @@ class Model(object):
             result": R,
             "meta": {"outcome": h}
         }
-        return R
+        shutil.rmtree(tmp_folder)
+        return output
 
 
 class Artifact(BentoServiceArtifact):
