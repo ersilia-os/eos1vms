@@ -69,10 +69,10 @@ class Model(object):
             for r in reader:
                 R += [{"outcome": [float(x) for x in r]}]
         output = {
-            result": R,
+            "result": R,
             "meta": {"outcome": h}
         }
-        #shutil.rmtree(tmp_folder)
+        shutil.rmtree(tmp_folder)
         return output
 
 
