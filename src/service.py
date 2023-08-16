@@ -70,7 +70,7 @@ class Model(object):
                 R += [{"outcome": [float(x) for x in r]}]
         output = {
             "result": R,
-            "meta": {"outcome": h}
+            "outcome": h
         }
         shutil.rmtree(tmp_folder)
         return output
