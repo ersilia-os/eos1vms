@@ -74,21 +74,27 @@ mols = []
 
 with open(input_file, "r") as f:
     reader = csv.reader(f)
-    
-    
     for r in reader:
         smiles += [r[0]]
         mols += [Chem.MolFromSmiles(r[0])]
 
 X = desc.calc(mols)
 
-data = pd.DataFrame(X, columns=desc.targets)
+main_targets = []
+for preds in X:
+    main_target_index = np.argmax(preds)
+    main_target = desc.targets[main_target_index]
+    main_target_score = preds[main_target_index]
+    main_targets.append((main_target, main_target_score))
+
+# Create a DataFrame to store the main targets
+main_targets_data = pd.DataFrame({'Main_Target': [target for target, _ in main_targets],
+                                  'Prediction_Score': [score for _, score in main_targets]})
 
 
 # Open the output file in append mode
 with open(output_file, "a", newline="") as f:
     writer = csv.writer(f)
-    #writer.writerow(desc.targets)  # Write the header
 
     # Append the DataFrame data to the output file
-    data.to_csv(f, index=False)
+    main_targets_data.to_csv(f, index=False)
