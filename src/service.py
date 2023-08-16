@@ -67,11 +67,11 @@ class Model(object):
             h = next(reader)
             R = []
             for r in reader:
-                entry = {"header": h, "outcome": [float(x) for x in r]}
+                entry = {"targets": h, "scores": [float(x) for x in r]}
                 R.append(entry)
         output = {
-            "result": R,
-            "meta": {"outcome": h}
+            'result': R,
+            'meta': {'scores': h}
         }
         shutil.rmtree(tmp_folder)
         return output
