@@ -64,14 +64,15 @@ class Model(object):
             ).wait()
         with open(pred_file, "r") as f:
             reader = csv.reader(f)
-            #h = next(reader)
+            h = next(reader)
             R = []
             for r in reader:
-                R += [{"outcome": [str(x) for x in r]}]
+                R += [{"outcome": [float(x) for x in r]}]
         output = {
-            "result": R,
-            #"meta": {"outcome": h}
-        }
+            "header": h,
+            "result" : R
+            }
+        
         return output
 
 
