@@ -70,7 +70,7 @@ class Model(object):
                 R += [{"outcome": [float(x) for x in r]}]
         output = {
             "result" : R,
-             "header": h
+            "header": h
             }
         
         return output
