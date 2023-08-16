@@ -69,8 +69,8 @@ class Model(object):
             for r in reader:
                 R += [{"outcome": [float(x) for x in r]}]
         output = {
-            "header": h,
-            "result" : R
+            "result" : R,
+             "header": h
             }
         
         return output
