@@ -12,7 +12,6 @@ import collections
 import tempfile
 import subprocess
 import csv
-import pandas as pd
 
 CHECKPOINTS_BASEDIR = "checkpoints"
 FRAMEWORK_BASEDIR = "framework"
@@ -67,11 +66,12 @@ class Model(object):
             reader = csv.reader(f)
             h = next(reader)
             R = []
-            data = [list(map(float, r)) for r in reader]
-        df = pd.DataFrame(data, columns=h)
+            for r in reader:
+                entry = {"header": h, "outcome": [float(x) for x in r]}
+                R.append(entry)
         output = {
-            "dataframe": df
-
+            "result": R,
+            "meta": {"outcome": h}
         }
         shutil.rmtree(tmp_folder)
         return output
