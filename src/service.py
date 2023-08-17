@@ -66,7 +66,7 @@ class Model(object):
             reader = csv.reader(f)
             h = next(reader)
             R = []
-            R += {"targets" : h}
+            R.append({"targets" : h})
             for r in reader:
                 entry = {"scores": [float(x) for x in r]}
                 R.append(entry)
