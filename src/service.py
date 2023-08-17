@@ -70,6 +70,7 @@ class Model(object):
                 R += [{"scores": [float(x) for x in r]}]
         print("R", R)
         output = {
+            'header' : h 
             'result': R,
             'meta': {'scores': h}
         }
