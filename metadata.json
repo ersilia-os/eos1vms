@@ -16,7 +16,7 @@
         "Text"
     ],
     "Output Type": [
-        "String"
+        "Float"
     ],
     "Output Shape": "Flexible List",
     "Interpretation": "Main protein target. Thresholds at 10 uM and 1 uM",
