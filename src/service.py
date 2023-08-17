@@ -69,14 +69,14 @@ class Model(object):
             for r in reader:
                 main_target = r[0]
                 prediction_score = float(r[1])
-                entry = {main_target, prediction_score}
+                entry = {"Main Target": main_target, "Prediction Score": prediction_score}
                 R.append(entry)
         output = {
             'result': R,
             'meta': {'scores': h}
         }
         shutil.rmtree(tmp_folder)
-        return output
+        return R
 
 
 class Artifact(BentoServiceArtifact):
