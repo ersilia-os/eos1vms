@@ -81,11 +81,14 @@ with open(input_file, "r") as f:
 X = desc.calc(mols)
 
 # Create a DataFrame to store the main targets
-data = pd.DataFrame(columns=['chembl_id'] + list(X.columns))
+data = pd.DataFrame()
 
-# Populate the data DataFrame with chembl_id and prediction scores
-data['chembl_id'] = smiles
-data.iloc[:, 1:] = X.values  # Assign the prediction scores from X to data
+# Set 'chembl_id' values in the DataFrame from desc.targets
+data['chembl_id'] = desc.targets
+
+# Populate the DataFrame with prediction scores for each target
+for i, target in enumerate(desc.targets):
+    data[target] = X[:, i]  # Extract prediction scores for each target
 
 # Open the output file in write mode
 with open(output_file, "w", newline="") as f:
