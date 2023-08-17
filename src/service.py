@@ -67,7 +67,9 @@ class Model(object):
             h = next(reader)
             R = []
             for r in reader:
-                entry = {"Main Target": r[0], "Prediction Score": [float(r[1])]}
+                main_target = r[0]
+                prediction_score = float(r[1])
+                entry = {"Main Target": main_target, "Prediction Score": prediction_score}
                 R.append(entry)
         output = {
             'result': R,
