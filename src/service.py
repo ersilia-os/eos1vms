@@ -133,4 +133,4 @@ class Service(BentoService):
         input = input[0]
         smiles_list = [inp["input"] for inp in input]
         output = self.artifacts.model.run(smiles_list)
-        return [output]
+        return output
