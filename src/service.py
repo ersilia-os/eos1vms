@@ -57,21 +57,18 @@ class Model(object):
             f.write(os.linesep.join(lines))
         cmd = "bash {0}".format(run_file)
 
-        print("Command to execute:", cmd)
         with open(os.devnull, "w") as fp:
             subprocess.Popen(
                 cmd, stdout=fp, stderr=fp, shell=True, env=os.environ
             ).wait()
+
         with open(pred_file, "r") as f:
             reader = csv.reader(f)
             h = next(reader)
             R = []
             for r in reader:
-                entry = {"Headers": h, "Prediction Scores": [float(x) for x in r]}
-                #main_target = r[0]
-                #prediction_score = float(r[1])
-                #entry = {"Main Target": main_target, "Prediction Score": prediction_score}
-                #R.append(entry)
+                R += [{"scores": [float(x) for x in r]}]
+        print("R", R)
         output = {
             'result': R,
             'meta': {'scores': h}
