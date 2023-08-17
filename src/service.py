@@ -67,9 +67,10 @@ class Model(object):
             h = next(reader)
             R = []
             for r in reader:
-                entry = {"targets": h, "scores": [float(x) for x in r]}
+                entry = {"scores": [float(x) for x in r]}
                 R.append(entry)
         output = {
+            'header': {h},
             'result': R,
             'meta': {'scores': h}
         }
