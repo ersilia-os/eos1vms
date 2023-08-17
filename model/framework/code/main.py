@@ -81,16 +81,8 @@ with open(input_file, "r") as f:
 X = desc.calc(mols)
 
 # Create a DataFrame to store the main targets
-data = pd.DataFrame()
-
-# Set 'chembl_id' values in the DataFrame from desc.targets
-data['chembl_id'] = desc.targets
-
-# Populate the DataFrame with prediction scores for each target
-for i, target in enumerate(desc.targets):
-    data[target] = X[:, i]  # Extract prediction scores for each target
-
-# Open the output file in write mode
-with open(output_file, "w", newline="") as f:
-    # Write the data DataFrame to the output file
-    data.to_csv(f, index=False)  # index=False will exclude the index column from the output CSV
+with open(output_file, "w") as f:
+    writer = csv.writer(f)
+    writer.writerow(desc.targets)
+    for i in range(X.shape[0]):
+        writer.writerow(X[i])
