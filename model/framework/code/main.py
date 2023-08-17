@@ -80,21 +80,14 @@ with open(input_file, "r") as f:
 
 X = desc.calc(mols)
 
-main_targets = []
-for preds in X:
-    main_target_index = np.argmax(preds)
-    main_target = desc.targets[main_target_index]
-    main_target_score = preds[main_target_index]
-    main_targets.append((main_target, main_target_score))
-
 # Create a DataFrame to store the main targets
-main_targets_data = pd.DataFrame({'Main_Target': [target for target, _ in main_targets],
-                                  'Prediction_Score': [score for _, score in main_targets]})
+data = pd.DataFrame(columns=['chembl_id'] + list(X.columns))
 
+# Populate the data DataFrame with chembl_id and prediction scores
+data['chembl_id'] = smiles
+data.iloc[:, 1:] = X.values  # Assign the prediction scores from X to data
 
-# Open the output file in append mode
-with open(output_file, "a", newline="") as f:
-    writer = csv.writer(f)
-
-    # Append the DataFrame data to the output file
-    main_targets_data.to_csv(f, index=False)
+# Open the output file in write mode
+with open(output_file, "w", newline="") as f:
+    # Write the data DataFrame to the output file
+    data.to_csv(f, index=False)  # index=False will exclude the index column from the output CSV
