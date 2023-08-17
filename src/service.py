@@ -70,7 +70,7 @@ class Model(object):
                 entry = {"scores": [float(x) for x in r]}
                 R.append(entry)
         output = {
-            'header': {h},
+            #'header': {h},
             'result': R,
             'meta': {'scores': h}
         }
