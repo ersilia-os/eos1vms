@@ -69,7 +69,7 @@ class Model(object):
             for r in reader:
                 main_target = r[0]
                 prediction_score = float(r[1])
-                entry = {"Main Target": main_target, "Prediction Score": prediction_score}
+                entry = ("Main Target": main_target, "Prediction Score": prediction_score)
                 R.append(entry)
         output = {
             'result': R,
@@ -133,4 +133,4 @@ class Service(BentoService):
         input = input[0]
         smiles_list = [inp["input"] for inp in input]
         output = self.artifacts.model.run(smiles_list)
-        return output
+        return [output]
