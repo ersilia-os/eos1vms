@@ -68,6 +68,7 @@ class Model(object):
             h = next(reader)
             R = []
             for r in reader:
+                print("hm")
                 R += [
                     {"outcome": [float(x) for x in r]}
                 ]  # <-- EDIT: Modify according to type of output (Float, String...)
