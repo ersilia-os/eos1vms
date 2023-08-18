@@ -16,41 +16,17 @@ import csv
 CHECKPOINTS_BASEDIR = "checkpoints"
 FRAMEWORK_BASEDIR = "framework"
 
-print("hello")
 def load_model(framework_dir, checkpoints_dir):
     mdl = Model()
     mdl.load(framework_dir, checkpoints_dir)
     return mdl
 
 
-def Float(x):
-    try:
-        return float(x)
-    except:
-        return None
-
-
-def String(x):
-    x = str(x)
-    if not x:
-        return None
-    if x == "nan":
-        return None
-    if x == "null":
-        return None
-    if x == "False":
-        return None
-    if x == "None":
-        return None
-    return x
-
-
 class Model(object):
     def __init__(self):
-        self.DATA_FILE = "_data.csv"
-        self.OUTPUT_FILE = "_output.csv"
+        self.DATA_FILE = "data.csv"
+        self.OUTPUT_FILE = "pred.csv"
         self.RUN_FILE = "run.sh"
-        self.LOG_FILE = "run.log"
 
     def load(self, framework_dir, checkpoints_dir):
         self.framework_dir = framework_dir
@@ -62,41 +38,41 @@ class Model(object):
     def set_framework_dir(self, dest):
         self.framework_dir = os.path.abspath(dest)
 
-    def run(self, input_list):
-        tmp_folder = tempfile.mkdtemp(prefix="eos-")
+    def run(self, smiles_list):
+        tmp_folder = tempfile.mkdtemp()
         data_file = os.path.join(tmp_folder, self.DATA_FILE)
-        output_file = os.path.join(tmp_folder, self.OUTPUT_FILE)
-        log_file = os.path.join(tmp_folder, self.LOG_FILE)
+        pred_file = os.path.join(tmp_folder, self.OUTPUT_FILE)
         with open(data_file, "w") as f:
-            print("data file")
-            f.write("input" + os.linesep)
-            for inp in input_list:
-                f.write(inp + os.linesep)
+            for smiles in smiles_list:
+                f.write(smiles + os.linesep)
         run_file = os.path.join(tmp_folder, self.RUN_FILE)
         with open(run_file, "w") as f:
             lines = [
                 "bash {0}/run.sh {0} {1} {2}".format(
-                    self.framework_dir, data_file, output_file
+                    self.framework_dir,
+                    data_file,
+                    pred_file,
                 )
             ]
             f.write(os.linesep.join(lines))
         cmd = "bash {0}".format(run_file)
-        with open(log_file, "w") as fp:
+
+        with open(os.devnull, "w") as fp:
             subprocess.Popen(
                 cmd, stdout=fp, stderr=fp, shell=True, env=os.environ
             ).wait()
-        print("log")
-        with open(output_file, "r") as f:
+
+        with open(pred_file, "r") as f:
             reader = csv.reader(f)
             h = next(reader)
-            R = []
+            result = {"meta": {"outcome": h}, "result": []}
+            #R = []
             for r in reader:
-                print("R", R)
-                R += [
-                    {"outcome": [Float(x) for x in r]}
-                ]  # <-- EDIT: Modify according to type of output (Float, String...)
+                entry = {"outcome": [float(x) for x in r]}
+                result["result"].append(entry)
+                #R.append(entry)
+       
         meta = {"outcome": h}
-        print("meta")
         result = {"result": R, "meta": meta}
         shutil.rmtree(tmp_folder)
         return result
@@ -154,6 +130,6 @@ class Service(BentoService):
     @api(input=JsonInput(), batch=True)
     def run(self, input: List[JsonSerializable]):
         input = input[0]
-        input_list = [inp["input"] for inp in input]
-        output = self.artifacts.model.run(input_list)
+        smiles_list = [inp["input"] for inp in input]
+        output = self.artifacts.model.run(smiles_list)
         return [output]
