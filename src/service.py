@@ -68,7 +68,7 @@ class Model(object):
             R = []
             #R.append({"targets" : [h]})
             for r in reader:
-                entry = {"outcome": [Float(x) for x in r]}
+                entry = {"outcome": [str(x) for x in r]}
                 R.append(entry)
        
         meta = {"outcome": h}
