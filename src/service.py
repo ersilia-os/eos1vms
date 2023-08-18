@@ -27,7 +27,6 @@ class Model(object):
         self.DATA_FILE = "data.csv"
         self.OUTPUT_FILE = "pred.csv"
         self.RUN_FILE = "run.sh"
-        self.LOG_FILE = "run.log"
 
     def load(self, framework_dir, checkpoints_dir):
         self.framework_dir = framework_dir
@@ -58,7 +57,7 @@ class Model(object):
             f.write(os.linesep.join(lines))
         cmd = "bash {0}".format(run_file)
 
-        with open(log_file, "w") as fp:
+        with open(os.devnull, "w") as fp:
             subprocess.Popen(
                 cmd, stdout=fp, stderr=fp, shell=True, env=os.environ
             ).wait()
@@ -67,15 +66,13 @@ class Model(object):
             reader = csv.reader(f)
             h = next(reader)
             R = []
+            #R.append({"targets" : [h]})
             for r in reader:
-                print("hm")
-                R += [
-                    {"outcome": [float(x) for x in r]}
-                ]  # <-- EDIT: Modify according to type of output (Float, String...)
-                print("hello")
+                entry = {"outcome": [float(x) for x in r]}
+                R.append(entry)
+       
         meta = {"outcome": h}
         result = {"result": R, "meta": meta}
-        print("result", result)
         shutil.rmtree(tmp_folder)
         return result
 
