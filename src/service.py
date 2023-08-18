@@ -68,7 +68,7 @@ class Model(object):
             result = {"result": [{"target": h}]}
             #R = []
             for r in reader:
-                entry = {"outcome": [float(x) for x in r]}
+                entry = {"outcome": [str(x) for x in r]}
                 result["result"].append(entry)
                 #R.append(entry)
        
