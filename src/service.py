@@ -70,8 +70,8 @@ class Model(object):
             for r in reader:
                 R += [
                     {"outcome": [Float(x) for x in r]}
-                    print("hello")
                 ]  # <-- EDIT: Modify according to type of output (Float, String...)
+                print("hello")
         meta = {"outcome": h}
         result = {"result": R, "meta": meta}
         print("result", result)
