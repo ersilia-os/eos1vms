@@ -8,7 +8,6 @@ from rdkit import Chem
 from rdkit.Chem import rdMolDescriptors
 
 import onnxruntime as rt
-print("here")
 
 FP_SIZE = 1024
 RADIUS = 2
@@ -17,7 +16,6 @@ EXAMPLE = 'CN(C)CCc1c[nH]c2ccc(C[C@H]3COC(=O)N3)cc12'
 input_file = os.path.abspath(sys.argv[1])
 output_file = os.path.abspath(sys.argv[2])
 checkpoints_dir = os.path.abspath("eos1vms/model/checkpoints")
-print("here")
 
 class Chembl(object):
 
