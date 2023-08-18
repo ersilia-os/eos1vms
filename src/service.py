@@ -62,17 +62,16 @@ class Model(object):
                 cmd, stdout=fp, stderr=fp, shell=True, env=os.environ
             ).wait()
 
-        with open(pred_file, "r") as f:
+        with open(output_file, "r") as f:
             reader = csv.reader(f)
-            #h = next(reader)
+            h = next(reader)
             R = []
-            #R.append({"targets" : [h]})
             for r in reader:
-                entry = {"outcome": [String(x) for x in r]}
-                R.append(entry)
-       
-        #meta = {"outcome": h}
-        result = {"result": R,}
+                R += [
+                    {"outcome": [Float(x) for x in r]}
+                ]  # <-- EDIT: Modify according to type of output (Float, String...)
+        meta = {"outcome": h}
+        result = {"result": R, "meta": meta}
         shutil.rmtree(tmp_folder)
         return result
 
