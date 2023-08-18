@@ -16,9 +16,9 @@
         "Text"
     ],
     "Output Type": [
-        "Float"
+        "String"
     ],
-    "Output Shape": "Flexible List",
+    "Output Shape": "List",
     "Interpretation": "Main protein target. Thresholds at 10 uM and 1 uM",
     "Tag": [
         "Bioactivity profile",
