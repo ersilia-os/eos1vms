@@ -84,3 +84,4 @@ with open(output_file, "w") as f:
     writer.writerow(desc.targets)
     for i in range(X.shape[0]):
         writer.writerow(X[i])
+print("here2")
