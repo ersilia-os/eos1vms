@@ -65,7 +65,7 @@ class Model(object):
         with open(pred_file, "r") as f:
             reader = csv.reader(f)
             h = next(reader)
-            result = {"meta": {"outcome": h}, "result": []}
+            result = {"result": [{"outcome": h}]}
             #R = []
             for r in reader:
                 entry = {"outcome": [float(x) for x in r]}
