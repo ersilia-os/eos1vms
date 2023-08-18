@@ -65,14 +65,15 @@ class Model(object):
         with open(pred_file, "r") as f:
             reader = csv.reader(f)
             h = next(reader)
-            R = []
-            #R.append({"targets" : [h]})
+            result = {"meta": {"outcome": h}, "result": []}
+            #R = []
             for r in reader:
-                entry = {"outcome": [str(x) for x in r]}
-                R.append(entry)
+                entry = {"outcome": [float(x) for x in r]}
+                result["result"].append(entry)
+                #R.append(entry)
        
-        meta = {"outcome": h}
-        result = {"result": R, "meta": meta}
+        #meta = {"outcome": h}
+        #result = {"result": R, "meta": meta}
         shutil.rmtree(tmp_folder)
         return result
 
