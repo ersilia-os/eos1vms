@@ -16,7 +16,7 @@ import csv
 CHECKPOINTS_BASEDIR = "checkpoints"
 FRAMEWORK_BASEDIR = "framework"
 
-
+print("hello")
 def load_model(framework_dir, checkpoints_dir):
     mdl = Model()
     mdl.load(framework_dir, checkpoints_dir)
