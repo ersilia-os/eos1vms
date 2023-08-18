@@ -72,8 +72,8 @@ class Model(object):
                 result["result"].append(entry)
                 #R.append(entry)
        
-        meta = {"outcome": h}
-        result = {"result": R, "meta": meta}
+        #meta = {"outcome": h}
+        #result = {"result": R, "meta": meta}
         shutil.rmtree(tmp_folder)
         return result
 
