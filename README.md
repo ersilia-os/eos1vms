@@ -14,7 +14,7 @@ This is a ligand-based target prediction model developed by the ChEMBL team. The
 * Task: `Classification`
 * Output: `Text`
 * Output Type: `String`
-* Output Shape: `Flexible List`
+* Output Shape: `List`
 * Interpretation: Main protein target. Thresholds at 10 uM and 1 uM
 
 ## References

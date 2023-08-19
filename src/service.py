@@ -25,7 +25,7 @@ def load_model(framework_dir, checkpoints_dir):
 class Model(object):
     def __init__(self):
         self.DATA_FILE = "data.csv"
-        self.PRED_FILE = "pred.csv"
+        self.OUTPUT_FILE = "pred.csv"
         self.RUN_FILE = "run.sh"
 
     def load(self, framework_dir, checkpoints_dir):
@@ -41,37 +41,41 @@ class Model(object):
     def run(self, smiles_list):
         tmp_folder = tempfile.mkdtemp()
         data_file = os.path.join(tmp_folder, self.DATA_FILE)
-        pred_file = os.path.join(tmp_folder, self.PRED_FILE)
+        pred_file = os.path.join(tmp_folder, self.OUTPUT_FILE)
         with open(data_file, "w") as f:
             for smiles in smiles_list:
                 f.write(smiles + os.linesep)
         run_file = os.path.join(tmp_folder, self.RUN_FILE)
         with open(run_file, "w") as f:
             lines = [
-                "bash {0}/run.sh {0} {1} {2} {3}".format(
+                "bash {0}/run.sh {0} {1} {2}".format(
                     self.framework_dir,
                     data_file,
                     pred_file,
-                    self.checkpoints_dir
                 )
             ]
             f.write(os.linesep.join(lines))
         cmd = "bash {0}".format(run_file)
+
         with open(os.devnull, "w") as fp:
             subprocess.Popen(
                 cmd, stdout=fp, stderr=fp, shell=True, env=os.environ
             ).wait()
+
         with open(pred_file, "r") as f:
             reader = csv.reader(f)
             h = next(reader)
-            R = []
+            result = {"meta": {"outcome": h}, "result": []}
+            #R = []
             for r in reader:
-                R += [{"scores": [float(x) for x in r]}]
-        output = {
-            'result': R,
-            'meta': {'scores': h}
-        }
-        return output
+                entry = {"outcome": [float(x) for x in r]}
+                result["result"].append(entry)
+                #R.append(entry)
+       
+        #meta = {"outcome": h}
+        #result = {"result": R, "meta": meta}
+        shutil.rmtree(tmp_folder)
+        return result
 
 
 class Artifact(BentoServiceArtifact):
