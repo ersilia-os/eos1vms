@@ -1,6 +1,6 @@
 # Multi-target prediction based on ChEMBL data
 
-This is a ligand-based target prediction model developed by the ChEMBL team. They trained the model using pairs of small molecules and their protein targets, and produced a predictor for two cut-offs: 1uM and 10uM. The model predicts the main target of a small molecule with an accuracy of 69%. These predictors are available since ChEMBL\_18 and have been subsequently updated since. You can read more about it in the ChEMBL blogpost. Here we use the ChEMBL\_25 version (2019).
+This is a ligand-based target prediction model developed by the ChEMBL team. They trained the model using pairs of small molecules and their protein targets, and produced a multitask predictor. The thresholds of activity where determined by protein families (kinases: <= 30nM,  GPCRs: <= 100nM, Nuclear Receptors: <= 100nM, Ion Channels: <= 10μM, Non-IDG Family Targets: <= 1μM). Here we provide the model trained on ChEMBL\_28, which showed an accuracy of 85%.
 
 ## Identifiers
 
@@ -12,15 +12,15 @@ This is a ligand-based target prediction model developed by the ChEMBL team. The
 * Input: `Compound`
 * Input Shape: `Single`
 * Task: `Classification`
-* Output: `Text`
-* Output Type: `String`
+* Output: `Probability`
+* Output Type: `Float`
 * Output Shape: `List`
-* Interpretation: Main protein target. Thresholds at 10 uM and 1 uM
+* Interpretation: Probability of having the protein (identified by ChEMBL ID), as target
 
 ## References
 
-* [Publication](https://chembl.github.io/ligand-based-target-predictions-in/)
-* [Source Code](https://github.com/chembl/target_predictions)
+* [Publication](http://chembl.blogspot.com/2019/05/multi-task-neural-network-on-chembl.html)
+* [Source Code](https://github.com/chembl/chembl_multitask_model/)
 * Ersilia contributor: [miquelduranfrigola](https://github.com/miquelduranfrigola)
 
 ## Ersilia model URLs
@@ -30,11 +30,11 @@ This is a ligand-based target prediction model developed by the ChEMBL team. The
 
 ## Citation
 
-If you use this model, please cite the [original authors](https://chembl.github.io/ligand-based-target-predictions-in/) of the model and the [Ersilia Model Hub](https://github.com/ersilia-os/ersilia/blob/master/CITATION.cff).
+If you use this model, please cite the [original authors](http://chembl.blogspot.com/2019/05/multi-task-neural-network-on-chembl.html) of the model and the [Ersilia Model Hub](https://github.com/ersilia-os/ersilia/blob/master/CITATION.cff).
 
 ## License
 
-This package is licensed under a GPL-3.0 license. The model contained within this package is licensed under a Apache-2.0 license.
+This package is licensed under a GPL-3.0 license. The model contained within this package is licensed under a None license.
 
 Notice: Ersilia grants access to these models 'as is' provided by the original authors, please refer to the original code repository and/or publication if you use the model in your research.
 

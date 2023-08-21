@@ -61,21 +61,17 @@ class Model(object):
             subprocess.Popen(
                 cmd, stdout=fp, stderr=fp, shell=True, env=os.environ
             ).wait()
-
         with open(pred_file, "r") as f:
             reader = csv.reader(f)
             h = next(reader)
-            result = {"meta": {"outcome": h}, "result": []}
-            #R = []
+            R = []
             for r in reader:
-                entry = {"outcome": [float(x) for x in r]}
-                result["result"].append(entry)
-                #R.append(entry)
-       
-        #meta = {"outcome": h}
-        #result = {"result": R, "meta": meta}
-        shutil.rmtree(tmp_folder)
-        return result
+                R += [{"scores": [float(x) for x in r]}]
+        output = {
+            'result': R,
+            'meta': {'scores': h}
+        }
+        return output
 
 
 class Artifact(BentoServiceArtifact):

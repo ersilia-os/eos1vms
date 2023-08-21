@@ -3,7 +3,7 @@
     "Slug": "chembl-multitask-descriptor",
     "Status": "Ready",
     "Title": "Multi-target prediction based on ChEMBL data",
-    "Description": "This is a ligand-based target prediction model developed by the ChEMBL team. They trained the model using pairs of small molecules and their protein targets, and produced a predictor for two cut-offs: 1uM and 10uM. The model predicts the main target of a small molecule with an accuracy of 69%. These predictors are available since ChEMBL\\_18 and have been subsequently updated since. You can read more about it in the ChEMBL blogpost. Here we use the ChEMBL\\_25 version (2019).\n",
+    "Description": "This is a ligand-based target prediction model developed by the ChEMBL team. They trained the model using pairs of small molecules and their protein targets, and produced a multitask predictor. The thresholds of activity where determined by protein families (kinases: <= 30nM,  GPCRs: <= 100nM, Nuclear Receptors: <= 100nM, Ion Channels: <= 10\u03bcM, Non-IDG Family Targets: <= 1\u03bcM). Here we provide the model trained on ChEMBL_28, which showed an accuracy of 85%.",
     "Mode": "Pretrained",
     "Input": [
         "Compound"
@@ -13,21 +13,21 @@
         "Classification"
     ],
     "Output": [
-        "Text"
+        "Probability"
     ],
     "Output Type": [
-        "String"
+        "Float"
     ],
     "Output Shape": "List",
-    "Interpretation": "Main protein target. Thresholds at 10 uM and 1 uM",
+    "Interpretation": "Probability of having the protein (identified by ChEMBL ID), as target",
     "Tag": [
         "Bioactivity profile",
         "Target identification",
         "ChEMBL"
     ],
-    "Publication": "https://chembl.github.io/ligand-based-target-predictions-in/",
-    "Source Code": "https://github.com/chembl/target_predictions",
-    "License": "Apache-2.0",
+    "Publication": "http://chembl.blogspot.com/2019/05/multi-task-neural-network-on-chembl.html",
+    "Source Code": "https://github.com/chembl/chembl_multitask_model/",
+    "License": "None",
     "Contributor": "miquelduranfrigola",
     "S3": "https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos1vms.zip",
     "DockerHub": "https://hub.docker.com/r/ersiliaos/eos1vms",

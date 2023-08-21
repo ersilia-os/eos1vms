@@ -2,7 +2,6 @@ import os
 import sys
 import numpy as np
 import csv
-import pandas as pd
 
 from rdkit import Chem
 from rdkit.Chem import rdMolDescriptors
@@ -13,10 +12,13 @@ FP_SIZE = 1024
 RADIUS = 2
 EXAMPLE = 'CN(C)CCc1c[nH]c2ccc(C[C@H]3COC(=O)N3)cc12'
 
-input_file = os.path.abspath(sys.argv[1])
-output_file = os.path.abspath(sys.argv[2])
-checkpoints_dir = os.path.abspath("eos1vms/model/checkpoints")
-print("here")
+input_file = sys.argv[1]
+output_file = sys.argv[2]
+
+
+file_path = os.path.dirname(os.path.abspath(__file__))
+checkpoints_dir = os.path.join(file_path, "..", "..", "checkpoints")
+
 class Chembl(object):
 
     def __init__(self):
@@ -47,7 +49,7 @@ class Chembl(object):
         np_preds = [(tar, pre) for tar, pre in zip(targets, preds)]
         dt = [('chembl_id','|U20'), ('pred', '<f4')]
         np_preds = np.array(np_preds, dtype=dt)
-        np_preds[::-1].sort(order='chembl_id')
+        np_preds[::-1].sort(order='pred')
         return np_preds
 
     def calc(self, mols):
@@ -67,21 +69,18 @@ class Chembl(object):
 
 desc = Chembl()
 
-smiles = []
-mols = []
-
 with open(input_file, "r") as f:
     reader = csv.reader(f)
+    next(reader) #skip header
+    mols = []
+    smiles = []
     for r in reader:
         smiles += [r[0]]
         mols += [Chem.MolFromSmiles(r[0])]
+    X = desc.calc(mols)
 
-X = desc.calc(mols)
-
-# Create a DataFrame to store the main targets
 with open(output_file, "w") as f:
     writer = csv.writer(f)
     writer.writerow(desc.targets)
     for i in range(X.shape[0]):
         writer.writerow(X[i])
-print("here2")
