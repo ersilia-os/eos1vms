@@ -25,21 +25,6 @@ This model was incorporated on 2021-06-04.
 - **Output Consistency:** `Fixed`
 - **Interpretation:** Probability of having the protein (identified by ChEMBL ID), as target
 
-Below are the **Output Columns** of the model:
-| Name | Type | Direction | Description |
-|------|------|-----------|-------------|
-| chembl1075104 | float | high | Predicted probability of binding to protein CHEMBL1075104 |
-| chembl1075110 | float | high | Predicted probability of binding to protein CHEMBL1075110 |
-| chembl1075126 | float | high | Predicted probability of binding to protein CHEMBL1075126 |
-| chembl1075138 | float | high | Predicted probability of binding to protein CHEMBL1075138 |
-| chembl1075145 | float | high | Predicted probability of binding to protein CHEMBL1075145 |
-| chembl1075189 | float | high | Predicted probability of binding to protein CHEMBL1075189 |
-| chembl1075232 | float | high | Predicted probability of binding to protein CHEMBL1075232 |
-| chembl1075317 | float | high | Predicted probability of binding to protein CHEMBL1075317 |
-| chembl1163101 | float | high | Predicted probability of binding to protein CHEMBL1163101 |
-| chembl1163125 | float | high | Predicted probability of binding to protein CHEMBL1163125 |
-
-_10 of 616 columns are shown_
 ### Source and Deployment
 - **Source:** `Local`
 - **Source Type:** `External`
@@ -48,6 +33,8 @@ _10 of 616 columns are shown_
 - **S3 Storage**: [https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos1vms.zip](https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos1vms.zip)
 
 ### Resource Consumption
+- **Model Size (Mb):** `18`
+- **Environment Size (Mb):** `590`
 
 
 ### References
