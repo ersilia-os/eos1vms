@@ -3,22 +3,26 @@
     "Slug": "chembl-multitask-descriptor",
     "Status": "Ready",
     "Title": "Multi-target prediction based on ChEMBL data",
-    "Description": "This is a ligand-based target prediction model developed by the ChEMBL team. They trained the model using pairs of small molecules and their protein targets, and produced a multitask predictor. The thresholds of activity where determined by protein families (kinases: <= 30nM,  GPCRs: <= 100nM, Nuclear Receptors: <= 100nM, Ion Channels: <= 10\u03bcM, Non-IDG Family Targets: <= 1\u03bcM). Here we provide the model trained on ChEMBL_35",
-    "Mode": "Pretrained",
+    "Description": "This is a ligand-based target prediction model developed by the ChEMBL team. They trained the model using pairs of small molecules and their protein targets, and produced a multitask predictor. The thresholds of activity where determined by protein families (kinases: <= 30nM,  GPCRs: <= 100nM, Nuclear Receptors: <= 100nM, Ion Channels: <= 10\u03bcM, Non-IDG Family Targets: <= 1\u03bcM). Here we provide the model trained on ChEMBL\\_28, which showed an accuracy of 85%.\n",
+    "Source": "Local",
+    "Source Type": "External",
     "Input": [
         "Compound"
     ],
-    "Input Shape": "Single",
-    "Task": [
-        "Classification"
+    "Input Dimension": 1,
+    "Task": "Representation",
+    "Subtask": "Featurization",
+    "Biomedical Area": [
+        "Any"
+    ],
+    "Target Organism": [
+        "Not Applicable"
     ],
     "Output": [
         "Probability"
     ],
-    "Output Type": [
-        "Float"
-    ],
-    "Output Shape": "List",
+    "Output Dimension": 1,
+    "Output Consistency": "Fixed",
     "Interpretation": "Probability of having the protein (identified by ChEMBL ID), as target",
     "Tag": [
         "Bioactivity profile",
@@ -26,13 +30,19 @@
         "ChEMBL"
     ],
     "Publication": "http://chembl.blogspot.com/2019/05/multi-task-neural-network-on-chembl.html",
+    "Publication Type": "Other",
+    "Publication Year": 2019,
     "Source Code": "https://github.com/chembl/chembl_multitask_model/",
-    "License": "None",
+    "License": "MIT",
     "Contributor": "miquelduranfrigola",
-    "S3": "https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos1vms.zip",
+    "Incorporation Date": "2021-06-04",
     "DockerHub": "https://hub.docker.com/r/ersiliaos/eos1vms",
     "Docker Architecture": [
         "AMD64",
         "ARM64"
+    ],
+    "S3": "https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos1vms.zip",
+    "Deployment": [
+        "Local"
     ]
 }
