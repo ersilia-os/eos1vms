@@ -2,7 +2,7 @@
 
 This is a ligand-based target prediction model developed by the ChEMBL team. They trained the model using pairs of small molecules and their protein targets, and produced a multitask predictor. The thresholds of activity where determined by protein families (kinases: <= 30nM,  GPCRs: <= 100nM, Nuclear Receptors: <= 100nM, Ion Channels: <= 10μM, Non-IDG Family Targets: <= 1μM). Here we provide the model trained on ChEMBL\_28, which showed an accuracy of 85%.
 
-This model was incorporated on 2021-06-04.
+This model was incorporated on 2021-05-07.
 
 ## Information
 ### Identifiers
@@ -25,6 +25,21 @@ This model was incorporated on 2021-06-04.
 - **Output Consistency:** `Fixed`
 - **Interpretation:** Probability of having the protein (identified by ChEMBL ID), as target
 
+Below are the **Output Columns** of the model:
+| Name | Type | Direction | Description |
+|------|------|-----------|-------------|
+| chembl1075104 | float | high | Predicted probability of binding to protein CHEMBL1075104 |
+| chembl1075110 | float | high | Predicted probability of binding to protein CHEMBL1075110 |
+| chembl1075126 | float | high | Predicted probability of binding to protein CHEMBL1075126 |
+| chembl1075138 | float | high | Predicted probability of binding to protein CHEMBL1075138 |
+| chembl1075145 | float | high | Predicted probability of binding to protein CHEMBL1075145 |
+| chembl1075189 | float | high | Predicted probability of binding to protein CHEMBL1075189 |
+| chembl1075232 | float | high | Predicted probability of binding to protein CHEMBL1075232 |
+| chembl1075317 | float | high | Predicted probability of binding to protein CHEMBL1075317 |
+| chembl1163101 | float | high | Predicted probability of binding to protein CHEMBL1163101 |
+| chembl1163125 | float | high | Predicted probability of binding to protein CHEMBL1163125 |
+
+_10 of 616 columns are shown_
 ### Source and Deployment
 - **Source:** `Local`
 - **Source Type:** `External`
