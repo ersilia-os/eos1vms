@@ -3,7 +3,7 @@
     "Slug": "chembl-multitask-descriptor",
     "Status": "Ready",
     "Title": "Multi-target prediction based on ChEMBL data",
-    "Description": "This is a ligand-based target prediction model developed by the ChEMBL team. They trained the model using pairs of small molecules and their protein targets, and produced a multitask predictor. The thresholds of activity where determined by protein families (kinases: <= 30nM,  GPCRs: <= 100nM, Nuclear Receptors: <= 100nM, Ion Channels: <= 10\u03bcM, Non-IDG Family Targets: <= 1\u03bcM). Here we provide the model trained on ChEMBL_28, which showed an accuracy of 85%.",
+    "Description": "This is a ligand-based target prediction model developed by the ChEMBL team. They trained the model using pairs of small molecules and their protein targets, and produced a multitask predictor. The thresholds of activity where determined by protein families (kinases: <= 30nM,  GPCRs: <= 100nM, Nuclear Receptors: <= 100nM, Ion Channels: <= 10\u03bcM, Non-IDG Family Targets: <= 1\u03bcM). Here we provide the model trained on ChEMBL_35",
     "Mode": "Pretrained",
     "Input": [
         "Compound"
