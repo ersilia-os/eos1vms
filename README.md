@@ -50,7 +50,12 @@ _10 of 616 columns are shown_
 ### Resource Consumption
 - **Model Size (Mb):** `27`
 - **Environment Size (Mb):** `590`
+- **Image Size (Mb):** `589.52`
 
+**Computational Performance (seconds):**
+- 10 inputs: `30.91`
+- 100 inputs: `22.9`
+- 10000 inputs: `405.76`
 
 ### References
 - **Source Code**: [https://github.com/chembl/chembl_multitask_model/](https://github.com/chembl/chembl_multitask_model/)
