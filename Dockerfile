@@ -7,4 +7,4 @@ RUN pip install pandas==2.0.3
 RUN pip install numpy==1.26.4
 
 WORKDIR /repo
-COPY . /repo
+COPY ./repo
