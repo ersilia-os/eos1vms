@@ -4,6 +4,7 @@ This is a ligand-based target prediction model developed by the ChEMBL team. The
 
 This model was incorporated on 2021-05-07.
 
+
 ## Information
 ### Identifiers
 - **Ersilia Identifier:** `eos1vms`
@@ -13,7 +14,7 @@ This model was incorporated on 2021-05-07.
 - **Task:** `Representation`
 - **Subtask:** `Featurization`
 - **Biomedical Area:** `Any`
-- **Target Organism:** `Not Applicable`
+- **Target Organism:** `Any`
 - **Tags:** `Bioactivity profile`, `Target identification`, `ChEMBL`
 
 ### Input
