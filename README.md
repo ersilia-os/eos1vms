@@ -21,7 +21,7 @@ This model was incorporated on 2021-05-07.Last packaged on 2025-10-08.
 - **Input Dimension:** `1`
 
 ### Output
-- **Output Dimension:** `1`
+- **Output Dimension:** `618`
 - **Output Consistency:** `Fixed`
 - **Interpretation:** Probability of having the protein (identified by ChEMBL ID), as target
 
