@@ -1,7 +1,7 @@
 {
     "Identifier": "eos1vms",
     "Slug": "chembl-multitask-descriptor",
-    "Status": "In maintenance",
+    "Status": "Ready",
     "Title": "Multi-target prediction based on ChEMBL data",
     "Description": "This is a ligand-based target prediction model developed by the ChEMBL team. They trained the model using pairs of small molecules and their protein targets, and produced a multitask predictor. The thresholds of activity where determined by protein families (kinases: <= 30nM,  GPCRs: <= 100nM, Nuclear Receptors: <= 100nM, Ion Channels: <= 10\u03bcM, Non-IDG Family Targets: <= 1\u03bcM). Here we provide the model trained on ChEMBL\\_28, which showed an accuracy of 85%.",
     "Deployment": [
@@ -39,20 +39,17 @@
     "License": "MIT",
     "Contributor": "miquelduranfrigola",
     "Incorporation Date": "2021-05-07",
-    "Last Packaging Date": "2025-10-08",
+    "Last Packaging Date": "2026-03-09",
     "Release": "v1.0.0",
     "S3": "https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos1vms.zip",
     "DockerHub": "https://hub.docker.com/r/ersiliaos/eos1vms",
-    "Docker Architecture": [
-        "AMD64",
-        "ARM64"
-    ],
+    "Docker Architecture": "AMD64",
     "Model Size": 27.0,
     "Environment Size": 593.0,
-    "Image Size": 661.97,
-    "Computational Performance 1": 28.19,
-    "Computational Performance 2": 17.95,
-    "Computational Performance 3": 19.06,
-    "Computational Performance 4": 35.0,
-    "Computational Performance 5": 106.99
+    "Image Size": 667.16,
+    "Computational Performance 1": 34.36,
+    "Computational Performance 2": 25.35,
+    "Computational Performance 3": 22.79,
+    "Computational Performance 4": 37.86,
+    "Computational Performance 5": 100.53
 }
