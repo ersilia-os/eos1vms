@@ -2,7 +2,7 @@
 
 This is a ligand-based target prediction model developed by the ChEMBL team. They trained the model using pairs of small molecules and their protein targets, and produced a multitask predictor. The thresholds of activity where determined by protein families (kinases: <= 30nM,  GPCRs: <= 100nM, Nuclear Receptors: <= 100nM, Ion Channels: <= 10μM, Non-IDG Family Targets: <= 1μM). Here we provide the model trained on ChEMBL\_28, which showed an accuracy of 85%.
 
-This model was incorporated on 2021-05-07.Last packaged on 2025-10-08.
+This model was incorporated on 2021-05-07.Last packaged on 2026-03-09.
 
 ## Information
 ### Identifiers
@@ -44,18 +44,18 @@ _10 of 616 columns are shown_
 - **Source:** `Local`
 - **Source Type:** `External`
 - **DockerHub**: [https://hub.docker.com/r/ersiliaos/eos1vms](https://hub.docker.com/r/ersiliaos/eos1vms)
-- **Docker Architecture:** `AMD64`, `ARM64`
+- **Docker Architecture:** `AMD64`
 - **S3 Storage**: [https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos1vms.zip](https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos1vms.zip)
 
 ### Resource Consumption
 - **Model Size (Mb):** `27`
 - **Environment Size (Mb):** `593`
-- **Image Size (Mb):** `661.97`
+- **Image Size (Mb):** `667.16`
 
 **Computational Performance (seconds):**
-- 10 inputs: `28.19`
-- 100 inputs: `19.06`
-- 10000 inputs: `106.99`
+- 10 inputs: `34.36`
+- 100 inputs: `22.79`
+- 10000 inputs: `100.53`
 
 ### References
 - **Source Code**: [https://github.com/chembl/chembl_multitask_model/](https://github.com/chembl/chembl_multitask_model/)
