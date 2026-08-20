@@ -1,6 +1,6 @@
 # Multi-target prediction based on ChEMBL data
 
-Estimates which of 616 protein targets a compound is likely to bind, using the multitask model developed by the ChEMBL team from curated compound-target pairs. Activity thresholds were set per protein family rather than uniformly, reflecting that a meaningful potency cut-off differs between kinases, GPCRs and ion channels. Coverage mirrors the ChEMBL literature, so heavily studied targets are well represented while many proteins of interest are absent entirely.
+This is a ligand-based target prediction model developed by the ChEMBL team. They trained the model using pairs of small molecules and their protein targets, and produced a multitask predictor. The thresholds of activity where determined by protein families (kinases: <= 30nM,  GPCRs: <= 100nM, Nuclear Receptors: <= 100nM, Ion Channels: <= 10μM, Non-IDG Family Targets: <= 1μM). Here we provide the model trained on ChEMBL\_28, which showed an accuracy of 85%.
 
 This model was incorporated on 2021-05-07.Last packaged on 2026-03-09.
 
@@ -23,7 +23,7 @@ This model was incorporated on 2021-05-07.Last packaged on 2026-03-09.
 ### Output
 - **Output Dimension:** `616`
 - **Output Consistency:** `Fixed`
-- **Interpretation:** Probability of binding to each of 616 protein targets identified by ChEMBL identifier.
+- **Interpretation:** Probability of having the protein (identified by ChEMBL ID), as target
 
 Below are the **Output Columns** of the model:
 | Name | Type | Direction | Description |
