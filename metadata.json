@@ -3,14 +3,14 @@
     "Slug": "chembl-multitask-descriptor",
     "Status": "Ready",
     "Title": "Multi-target prediction based on ChEMBL data",
-    "Description": "This is a ligand-based target prediction model developed by the ChEMBL team. They trained the model using pairs of small molecules and their protein targets, and produced a multitask predictor. The thresholds of activity where determined by protein families (kinases: <= 30nM,  GPCRs: <= 100nM, Nuclear Receptors: <= 100nM, Ion Channels: <= 10\u03bcM, Non-IDG Family Targets: <= 1\u03bcM). Here we provide the model trained on ChEMBL\\_28, which showed an accuracy of 85%.",
+    "Description": "Estimates which of 616 protein targets a compound is likely to bind, using the multitask model developed by the ChEMBL team from curated compound-target pairs. Activity thresholds were set per protein family rather than uniformly, reflecting that a meaningful potency cut-off differs between kinases, GPCRs and ion channels. Coverage mirrors the ChEMBL literature, so heavily studied targets are well represented while many proteins of interest are absent entirely.",
     "Deployment": [
         "Local"
     ],
     "Source": "Local",
     "Source Type": "External",
-    "Task": "Representation",
-    "Subtask": "Featurization",
+    "Task": "Annotation",
+    "Subtask": "Activity prediction",
     "Input": [
         "Compound"
     ],
@@ -20,7 +20,7 @@
     ],
     "Output Dimension": 616,
     "Output Consistency": "Fixed",
-    "Interpretation": "Probability of having the protein (identified by ChEMBL ID), as target",
+    "Interpretation": "Probability of binding to each of 616 protein targets identified by ChEMBL identifier.",
     "Tag": [
         "Bioactivity profile",
         "Target identification",
