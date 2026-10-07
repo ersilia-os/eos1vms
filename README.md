@@ -1,6 +1,6 @@
 # Multi-target prediction based on ChEMBL data
 
-Estimates which of 616 protein targets a compound is likely to bind, using the multitask model developed by the ChEMBL team from curated compound-target pairs. Activity thresholds were set per protein family rather than uniformly, reflecting that a meaningful potency cut-off differs between kinases, GPCRs and ion channels. Coverage mirrors the ChEMBL literature, so heavily studied targets are well represented while many proteins of interest are absent entirely.
+Estimates which of 616 protein targets a compound is likely to bind, using the multitask neural network released by the ChEMBL team and trained on curated compound-target activity pairs. Activity thresholds were set per protein family rather than uniformly, ranging from 30 nM for kinases to 10 uM for ion channels, since a meaningful potency cut-off differs between target classes. The checkpoint served here was built on ChEMBL 28, and coverage mirrors the literature, so well-studied targets dominate while many proteins are absent.
 
 This model was incorporated on 2021-05-07.Last packaged on 2026-03-09.
 
@@ -23,7 +23,7 @@ This model was incorporated on 2021-05-07.Last packaged on 2026-03-09.
 ### Output
 - **Output Dimension:** `616`
 - **Output Consistency:** `Fixed`
-- **Interpretation:** Probability of binding to each of 616 protein targets identified by ChEMBL identifier.
+- **Interpretation:** Probability of binding to each of 616 protein targets named by ChEMBL identifier, under family-specific activity cut-offs.
 
 Below are the **Output Columns** of the model:
 | Name | Type | Direction | Description |
