@@ -39,17 +39,20 @@
     "License": "MIT",
     "Contributor": "miquelduranfrigola",
     "Incorporation Date": "2021-05-07",
-    "Last Packaging Date": "2026-03-09",
+    "Last Packaging Date": "2026-11-19",
     "Release": "v1.0.0",
     "S3": "https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos1vms.zip",
     "DockerHub": "https://hub.docker.com/r/ersiliaos/eos1vms",
-    "Docker Architecture": "AMD64",
+    "Docker Architecture": [
+        "AMD64",
+        "ARM64"
+    ],
     "Model Size": 26.0,
     "Environment Size": 600.0,
-    "Image Size": 667.16,
-    "Computational Performance 1": 34.36,
-    "Computational Performance 2": 25.35,
-    "Computational Performance 3": 22.79,
-    "Computational Performance 4": 37.86,
-    "Computational Performance 5": 100.53
+    "Image Size": 209.13,
+    "Computational Performance 1": 28.23,
+    "Computational Performance 2": 18.12,
+    "Computational Performance 3": 18.55,
+    "Computational Performance 4": 36.68,
+    "Computational Performance 5": 120.21
 }
