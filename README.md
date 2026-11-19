@@ -3,7 +3,7 @@
 Estimates which of 616 protein targets a compound is likely to bind, using the multitask neural network released by the ChEMBL team and trained on curated compound-target activity pairs. Activity thresholds were set per protein family rather than uniformly, ranging from 30 nM for kinases to 10 uM for ion channels, since a meaningful potency cut-off differs between target classes. The checkpoint served here was built on ChEMBL 28, and coverage mirrors the literature, so well-studied targets dominate while many proteins are absent.
 
 This model was incorporated on 2021-05-07.
-Last packaged on 2026-03-09.
+Last packaged on 2026-11-19.
 
 ## Information
 ### Identifiers
@@ -45,18 +45,18 @@ _10 of 616 columns are shown_
 - **Source:** `Local`
 - **Source Type:** `External`
 - **DockerHub**: [https://hub.docker.com/r/ersiliaos/eos1vms](https://hub.docker.com/r/ersiliaos/eos1vms)
-- **Docker Architecture:** `AMD64`
+- **Docker Architecture:** `AMD64`, `ARM64`
 - **S3 Storage**: [https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos1vms.zip](https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos1vms.zip)
 
 ### Resource Consumption
 - **Model Size (Mb):** `26`
 - **Environment Size (Mb):** `600`
-- **Image Size (Mb):** `667.16`
+- **Image Size (Mb):** `209.13`
 
 **Computational Performance (seconds):**
-- 10 inputs: `34.36`
-- 100 inputs: `22.79`
-- 10000 inputs: `100.53`
+- 10 inputs: `28.23`
+- 100 inputs: `18.55`
+- 10000 inputs: `120.21`
 
 ### References
 - **Source Code**: [https://github.com/chembl/chembl_multitask_model/](https://github.com/chembl/chembl_multitask_model/)
