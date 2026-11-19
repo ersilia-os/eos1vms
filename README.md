@@ -2,7 +2,8 @@
 
 Estimates which of 616 protein targets a compound is likely to bind, using the multitask neural network released by the ChEMBL team and trained on curated compound-target activity pairs. Activity thresholds were set per protein family rather than uniformly, ranging from 30 nM for kinases to 10 uM for ion channels, since a meaningful potency cut-off differs between target classes. The checkpoint served here was built on ChEMBL 28, and coverage mirrors the literature, so well-studied targets dominate while many proteins are absent.
 
-This model was incorporated on 2021-05-07.Last packaged on 2026-03-09.
+This model was incorporated on 2021-05-07.
+Last packaged on 2026-03-09.
 
 ## Information
 ### Identifiers
